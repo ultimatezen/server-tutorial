@@ -1,2 +1,2 @@
 # server-tutorial
-Simple slides for server
+Simple slides for basic server information

@@ -2,17 +2,21 @@
     "slides": [
         {
             "title": {
-                "en": "Building a Minecraft Server",
-                "ja": "マインクラフトサーバーの構築"
+                "en": "Building a Server",
+                "ja": "サーバーの構築"
             },
             "bullets": [
                 {
-                    "en": "This matters because when we’re building our server, we have to spec it higher due to the resource requirements of forge.",
-                    "ja": "サーバーを構築する際、Forgeのリソース要件のために高いスペックが必要です。"
+                    "en": "When building a server, we need to think about what the requirements are, that way we can spec it properly.",
+                    "ja": "サーバーを構築する際には、要件が何かを考える必要があります。そうすることで、適切に仕様を定義できます。"
                 },
                 {
-                    "en": "When building a server, we need to think about what the requirements and specs are.",
-                    "ja": "サーバー構築時には必要な要件やスペックを考慮する必要があります。"
+                    "en": "What questions do we need to ask?",
+                    "ja": "私たちはどのような質問をする必要がありますか？"
+                },
+                {
+                    "en": "How many simultaneous players do we want to support? What mods do we want to run?",
+                    "ja": "同時接続プレイヤー数を何人までサポートしますか？どのMODを実行しますか？"
                 }
             ]
         },
@@ -23,16 +27,16 @@
             },
             "bullets": [
                 {
-                    "en": "Ports need to be opened in the firewall. Probably static IP or some other kind of proxy.",
-                    "ja": "ファイアウォールでポートを開放する必要があります。おそらく静的IPやプロキシも必要です。"
+                    "en": "What do we need to consider for networking?",
+                    "ja": "ネットワークに関して考慮すべきことは何ですか？"
+                },
+                {
+                    "en": "Bandwidth, firewalls, open ports, static IPs, proxies",
+                    "ja": "帯域幅、ファイアウォール、開放ポート、静的IP、プロキシ"
                 },
                 {
                     "en": "Need a fast network environment. At least 30Mbit/s up, 15Mbit/s down for 8+ players, so ideally at least 100Mbit/s up and 50Mbit/s down if we’re looking for 10-20 players as a minimal requirement.",
                     "ja": "高速なネットワーク環境が必要です。8人以上なら最低30Mbit/s上り、15Mbit/s下り、10～20人なら100Mbit/s上り、50Mbit/s下りが理想です。"
-                },
-                {
-                    "en": "We’ll need a network card if there’s no onboard networking (most motherboards have this). 1gb or 10gb network card should be fine if there isn’t one.",
-                    "ja": "オンボードネットワークがない場合はネットワークカードが必要です。1Gbまたは10Gbのカードで十分です。"
                 }
             ]
         },
@@ -141,10 +145,6 @@
                 {
                     "en": "We’ll need some kind of case and fans. Possibly a monitor, for setup.",
                     "ja": "ケースやファン、セットアップ用のモニターも必要です。"
-                },
-                {
-                    "en": "Would be good to just have SSH setup, so we can SSH in. The machine will also need SSH daemon and ports open for that traffic.",
-                    "ja": "SSHで接続できるように設定し、SSHデーモンとポート開放も必要です。"
                 }
             ]
         },
@@ -165,14 +165,6 @@
                 {
                     "en": "Linux may be hard since there’s very few ppl with experience, but the same can be said for Windows and Mac too…",
                     "ja": "Linuxは経験者が少ないため難しいかもしれませんが、WindowsやMacも同様です。"
-                },
-                {
-                    "en": "Only reason Mac is even in the question is because of the expensive Mac studios that are doing nothing.",
-                    "ja": "Macが候補に入るのは、使われていない高価なMac Studioがあるためです。"
-                },
-                {
-                    "en": "That would be the fastest machine possible unless we pay out a lot for new hardware.",
-                    "ja": "新しいハードウェアを購入しない限り、Mac Studioが最速のマシンです。"
                 }
             ]
         },
@@ -190,22 +182,14 @@
         },
         {
             "title": {
-                "en": "Firewall",
-                "ja": "ファイアウォール"
-            },
-            "bullets": [
-                {
-                    "en": "Firewall configuration is important for security and connectivity.",
-                    "ja": "ファイアウォールの設定はセキュリティと接続性のために重要です。"
-                }
-            ]
-        },
-        {
-            "title": {
                 "en": "Software and security updates",
                 "ja": "ソフトウェアとセキュリティの更新"
             },
             "bullets": [
+                {
+                    "en": "Will need a Java SDK to run the server.",
+                    "ja": "サーバーを実行するためにJava SDKが必要です。"
+                },
                 {
                     "en": "Keep your server software and OS up to date for security and stability.",
                     "ja": "サーバーソフトウェアとOSは常に最新の状態に保ち、セキュリティと安定性を確保しましょう。"
@@ -219,12 +203,8 @@
             },
             "bullets": [
                 {
-                    "en": "We can probably build the mod, compile and move it to the mods directory of our forge enabled server and it should work.",
-                    "ja": "Modを作成し、コンパイルしてForge対応サーバーのmodsディレクトリに移動すれば動作するはずです。"
-                },
-                {
-                    "en": "Need to test, along with backups.",
-                    "ja": "バックアップとともにテストが必要です。"
+                    "en": "We need to have a backup strategy, so we can recover from failures and think about backup interval, retention, and offsite storage.",
+                    "ja": "バックアップ戦略を策定し、障害からの復旧やバックアップの間隔、保持期間、オフサイトストレージについて考える必要があります。"
                 }
             ]
         }
