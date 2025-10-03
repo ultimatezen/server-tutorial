@@ -1,0 +1,434 @@
+{
+    "slides": [
+        {
+            "title": {
+                "en": "Building a Minecraft Server",
+                "ja": "マインクラフトサーバーの構築"
+            },
+            "bullets": [
+                {
+                    "en": "This matters because when we’re building our server, we have to spec it higher due to the resource requirements of forge.",
+                    "ja": "サーバーを構築する際、Forgeのリソース要件のために高いスペックが必要です。"
+                },
+                {
+                    "en": "When building a server, we need to think about what the requirements and specs are.",
+                    "ja": "サーバー構築時には必要な要件やスペックを考慮する必要があります。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Network",
+                "ja": "ネットワーク"
+            },
+            "bullets": [
+                {
+                    "en": "Ports need to be opened in the firewall. Probably static IP or some other kind of proxy.",
+                    "ja": "ファイアウォールでポートを開放する必要があります。おそらく静的IPやプロキシも必要です。"
+                },
+                {
+                    "en": "Need a fast network environment. At least 30Mbit/s up, 15Mbit/s down for 8+ players, so ideally at least 100Mbit/s up and 50Mbit/s down if we’re looking for 10-20 players as a minimal requirement.",
+                    "ja": "高速なネットワーク環境が必要です。8人以上なら最低30Mbit/s上り、15Mbit/s下り、10～20人なら100Mbit/s上り、50Mbit/s下りが理想です。"
+                },
+                {
+                    "en": "We’ll need a network card if there’s no onboard networking (most motherboards have this). 1gb or 10gb network card should be fine if there isn’t one.",
+                    "ja": "オンボードネットワークがない場合はネットワークカードが必要です。1Gbまたは10Gbのカードで十分です。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "CPU",
+                "ja": "CPU"
+            },
+            "bullets": [
+                {
+                    "en": "Any recent multicore cpu, either intel or amd, but amd probably has better value.",
+                    "ja": "最近のマルチコアCPU（IntelまたはAMD）が必要ですが、AMDの方がコストパフォーマンスが高いです。"
+                },
+                {
+                    "en": "And there’s that outside chance that we run it one of the mac studios.",
+                    "ja": "Mac Studioで運用する可能性もあります。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "GPU",
+                "ja": "GPU"
+            },
+            "bullets": [
+                {
+                    "en": "There’s no GPU acceleration, so GPU performance doesn’t matter (unless we run mods with some kinda GPU rendering on the server side).",
+                    "ja": "GPUアクセラレーションは不要なので、GPU性能は重要ではありません（サーバー側でGPUレンダリングするMODを使わない限り）。"
+                },
+                {
+                    "en": "We can probably get away with the integrated graphics.",
+                    "ja": "内蔵グラフィックスでも十分です。"
+                },
+                {
+                    "en": "If we use a mac studio, it’s gonna be way overspecced for the GPU.",
+                    "ja": "Mac Studioを使う場合、GPUはオーバースペックになります。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Memory",
+                "ja": "メモリ"
+            },
+            "bullets": [
+                {
+                    "en": "The memory requirements are higher for linux and macos, compared to windows… It shouldn’t matter, the difference should be small, 8gb for windows, 9gb for linux/macos according to the wiki.",
+                    "ja": "LinuxやmacOSはWindowsよりメモリ要件が高いですが、差は小さいです。Windowsは8GB、Linux/macOSは9GBが目安です。"
+                },
+                {
+                    "en": "That’s only the memory requirements to run the server, so linux in headless mode will be the most memory efficient probably.",
+                    "ja": "サーバー運用にはLinuxのヘッドレスモードが最もメモリ効率が良いでしょう。"
+                },
+                {
+                    "en": "In total, 16gb is a good starting point. 12gb for the server, 4gb for the OS, should be a good starting point for 10-20 players.",
+                    "ja": "合計16GBが良い目安です。サーバーに12GB、OSに4GBで10～20人に対応できます。"
+                },
+                {
+                    "en": "The Mac studios have 32gb, so no issues there.",
+                    "ja": "Mac Studioは32GBあるので問題ありません。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Storage",
+                "ja": "ストレージ"
+            },
+            "bullets": [
+                {
+                    "en": "Mechanical disk is bigger than needed and slower than SSD.",
+                    "ja": "HDDは容量が大きいですが、SSDより遅いです。"
+                },
+                {
+                    "en": "We’ll go with whatever SSD.",
+                    "ja": "SSDならどれでも構いません。"
+                },
+                {
+                    "en": "For 10-20 players, a minimum of 35gb of free space is recommended.",
+                    "ja": "10～20人なら最低35GBの空き容量が必要です。"
+                },
+                {
+                    "en": "Given world size, backups, and OS requirements, 128gb SSD should be good enough. More doesn’t hurt.",
+                    "ja": "ワールドサイズやバックアップ、OS要件を考慮すると128GBのSSDが十分です。多い分には問題ありません。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Motherboard",
+                "ja": "マザーボード"
+            },
+            "bullets": [
+                {
+                    "en": "Mobo depends on OS/CPU we decide to go with.",
+                    "ja": "マザーボードは選択するOSやCPUによって異なります。"
+                },
+                {
+                    "en": "Other notes with Motherboard. IDE express versions, lanes. These transport data from storage/gpu to main memory.",
+                    "ja": "IDE Expressのバージョンやレーン数も重要です。これらはストレージやGPUからメインメモリへのデータ転送に関係します。"
+                },
+                {
+                    "en": "There used to be sound cards, but these have fallen out of favor and most just have onboard sound now.",
+                    "ja": "昔はサウンドカードが必要でしたが、今はほとんどがオンボードです。"
+                },
+                {
+                    "en": "We’ll need some kind of case and fans. Possibly a monitor, for setup.",
+                    "ja": "ケースやファン、セットアップ用のモニターも必要です。"
+                },
+                {
+                    "en": "Would be good to just have SSH setup, so we can SSH in. The machine will also need SSH daemon and ports open for that traffic.",
+                    "ja": "SSHで接続できるように設定し、SSHデーモンとポート開放も必要です。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "OS",
+                "ja": "OS"
+            },
+            "bullets": [
+                {
+                    "en": "Windows, Linux, Mac",
+                    "ja": "Windows、Linux、Macが選択肢です。"
+                },
+                {
+                    "en": "Linux or Windows would be best.",
+                    "ja": "LinuxかWindowsが最適です。"
+                },
+                {
+                    "en": "Linux may be hard since there’s very few ppl with experience, but the same can be said for Windows and Mac too…",
+                    "ja": "Linuxは経験者が少ないため難しいかもしれませんが、WindowsやMacも同様です。"
+                },
+                {
+                    "en": "Only reason Mac is even in the question is because of the expensive Mac studios that are doing nothing.",
+                    "ja": "Macが候補に入るのは、使われていない高価なMac Studioがあるためです。"
+                },
+                {
+                    "en": "That would be the fastest machine possible unless we pay out a lot for new hardware.",
+                    "ja": "新しいハードウェアを購入しない限り、Mac Studioが最速のマシンです。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Java runtime environment (possibly sdk too)",
+                "ja": "Javaランタイム環境（SDKも必要かも）"
+            },
+            "bullets": [
+                {
+                    "en": "OS, windows, linux, mac",
+                    "ja": "OSはWindows、Linux、Macに対応しています。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Firewall",
+                "ja": "ファイアウォール"
+            },
+            "bullets": [
+                {
+                    "en": "Firewall configuration is important for security and connectivity.",
+                    "ja": "ファイアウォールの設定はセキュリティと接続性のために重要です。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Software and security updates",
+                "ja": "ソフトウェアとセキュリティの更新"
+            },
+            "bullets": [
+                {
+                    "en": "Keep your server software and OS up to date for security and stability.",
+                    "ja": "サーバーソフトウェアとOSは常に最新の状態に保ち、セキュリティと安定性を確保しましょう。"
+                }
+            ]
+        },
+        {
+            "title": {
+                "en": "Backups",
+                "ja": "バックアップ"
+            },
+            "bullets": [
+                {
+                    "en": "We can probably build the mod, compile and move it to the mods directory of our forge enabled server and it should work.",
+                    "ja": "Modを作成し、コンパイルしてForge対応サーバーのmodsディレクトリに移動すれば動作するはずです。"
+                },
+                {
+                    "en": "Need to test, along with backups.",
+                    "ja": "バックアップとともにテストが必要です。"
+                }
+            ]
+        }
+    ],
+    "quiz": [
+        {
+            "question": {
+                "en": "What is a recommended minimum upload speed for 10-20 Minecraft players?",
+                "ja": "10～20人のMinecraftプレイヤーに推奨される最低アップロード速度は？"
+            },
+            "choices": [
+                {
+                    "en": "10Mbit/s",
+                    "ja": "10Mbit/s"
+                },
+                {
+                    "en": "30Mbit/s",
+                    "ja": "30Mbit/s"
+                },
+                {
+                    "en": "100Mbit/s",
+                    "ja": "100Mbit/s"
+                },
+                {
+                    "en": "1Gbit/s",
+                    "ja": "1Gbit/s"
+                }
+            ],
+            "answer": 2
+        },
+        {
+            "question": {
+                "en": "Which operating system is most memory efficient for running a Minecraft server in headless mode?",
+                "ja": "ヘッドレスモードでMinecraftサーバーを運用する際、最もメモリ効率が良いOSは？"
+            },
+            "choices": [
+                {
+                    "en": "Windows",
+                    "ja": "Windows"
+                },
+                {
+                    "en": "Linux",
+                    "ja": "Linux"
+                },
+                {
+                    "en": "MacOS",
+                    "ja": "MacOS"
+                },
+                {
+                    "en": "All are equal",
+                    "ja": "全て同じ"
+                }
+            ],
+            "answer": 1
+        },
+        {
+            "question": {
+                "en": "What hardware component is least important for a Minecraft server?",
+                "ja": "Minecraftサーバーで最も重要度が低いハードウェアは？"
+            },
+            "choices": [
+                {
+                    "en": "CPU",
+                    "ja": "CPU"
+                },
+                {
+                    "en": "GPU",
+                    "ja": "GPU"
+                },
+                {
+                    "en": "Memory",
+                    "ja": "メモリ"
+                },
+                {
+                    "en": "Storage",
+                    "ja": "ストレージ"
+                }
+            ],
+            "answer": 1
+        },
+        {
+            "question": {
+                "en": "What is the recommended total memory for a server supporting 10-20 players?",
+                "ja": "10～20人対応サーバーの推奨メモリ容量は？"
+            },
+            "choices": [
+                {
+                    "en": "8GB",
+                    "ja": "8GB"
+                },
+                {
+                    "en": "12GB",
+                    "ja": "12GB"
+                },
+                {
+                    "en": "16GB",
+                    "ja": "16GB"
+                },
+                {
+                    "en": "32GB",
+                    "ja": "32GB"
+                }
+            ],
+            "answer": 2
+        },
+        {
+            "question": {
+                "en": "Why is SSD preferred over mechanical disk for Minecraft servers?",
+                "ja": "MinecraftサーバーでSSDがHDDより好まれる理由は？"
+            },
+            "choices": [
+                {
+                    "en": "SSDs are cheaper",
+                    "ja": "SSDは安価"
+                },
+                {
+                    "en": "SSDs are faster",
+                    "ja": "SSDは高速"
+                },
+                {
+                    "en": "SSDs have more capacity",
+                    "ja": "SSDは大容量"
+                },
+                {
+                    "en": "SSDs are louder",
+                    "ja": "SSDは騒音が大きい"
+                }
+            ],
+            "answer": 1
+        },
+        {
+            "question": {
+                "en": "What is a key software security practice for servers?",
+                "ja": "サーバーの重要なセキュリティ対策は？"
+            },
+            "choices": [
+                {
+                    "en": "Never update software",
+                    "ja": "ソフトウェアを更新しない"
+                },
+                {
+                    "en": "Always keep software and OS up to date",
+                    "ja": "ソフトウェアとOSを常に最新に保つ"
+                },
+                {
+                    "en": "Disable firewall",
+                    "ja": "ファイアウォールを無効にする"
+                },
+                {
+                    "en": "Use only default passwords",
+                    "ja": "デフォルトパスワードのみ使用"
+                }
+            ],
+            "answer": 1
+        },
+        {
+            "question": {
+                "en": "What is the main reason for opening ports in the firewall?",
+                "ja": "ファイアウォールでポートを開放する主な理由は？"
+            },
+            "choices": [
+                {
+                    "en": "To allow network traffic to the server",
+                    "ja": "サーバーへのネットワーク通信を許可するため"
+                },
+                {
+                    "en": "To increase server speed",
+                    "ja": "サーバー速度を上げるため"
+                },
+                {
+                    "en": "To reduce memory usage",
+                    "ja": "メモリ使用量を減らすため"
+                },
+                {
+                    "en": "To enable GPU acceleration",
+                    "ja": "GPUアクセラレーションを有効にするため"
+                }
+            ],
+            "answer": 0
+        },
+        {
+            "question": {
+                "en": "What is the purpose of backups for a Minecraft server?",
+                "ja": "Minecraftサーバーのバックアップの目的は？"
+            },
+            "choices": [
+                {
+                    "en": "To increase server speed",
+                    "ja": "サーバー速度を上げるため"
+                },
+                {
+                    "en": "To recover data in case of failure",
+                    "ja": "障害時にデータを復元するため"
+                },
+                {
+                    "en": "To reduce network usage",
+                    "ja": "ネットワーク使用量を減らすため"
+                },
+                {
+                    "en": "To enable firewall",
+                    "ja": "ファイアウォールを有効にするため"
+                }
+            ],
+            "answer": 1
+        }
+    ]
+}

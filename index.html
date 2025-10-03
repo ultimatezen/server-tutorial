@@ -5,8 +5,9 @@
 	<title>Server Tutorial</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Reveal.js CDN -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
+	<link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
 </head>
 <body>
 				<div style="position: fixed; top: 10px; right: 20px; z-index: 9999; font-family: sans-serif;">
@@ -16,173 +17,182 @@
 						<option value="ja">🇯🇵 日本語</option>
 					</select>
 				</div>
-		<div class="reveal">
-			<div class="slides">
-				<section>
+
+				<div class="reveal">
+					<div class="slides" id="slides-root">
+						<!-- Slides will be dynamically generated here -->
+					</div>
+				</div>
+				<section id="score-slide">
 					<h2>
-						<span class="lang-en">Building a Minecraft Server</span>
-						<span class="lang-ja" style="display:none;">マインクラフトサーバーの構築</span>
+						<span class="lang-en">Your Score</span>
+						<span class="lang-ja" style="display:none;">あなたのスコア</span>
 					</h2>
-					<p class="fragment lang-en">&bull; This matters because when we’re building our server, we have to spec it higher due to the resource requirements of forge.</p>
-					<p class="fragment lang-en">&bull; When building a server, we need to think about what the requirements and specs are.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; サーバーを構築する際、Forgeのリソース要件のために高いスペックが必要です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; サーバー構築時には必要な要件やスペックを考慮する必要があります。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Network</span>
-						<span class="lang-ja" style="display:none;">ネットワーク</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Ports need to be opened in the firewall. Probably static IP or some other kind of proxy.</p>
-					<p class="fragment lang-en">&bull; Need a fast network environment. At least 30Mbit/s up, 15Mbit/s down for 8+ players, so ideally at least 100Mbit/s up and 50Mbit/s down if we’re looking for 10-20 players as a minimal requirement.</p>
-					<p class="fragment lang-en">&bull; We’ll need a network card if there’s no onboard networking (most motherboards have this). 1gb or 10gb network card should be fine if there isn’t one.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; ファイアウォールでポートを開放する必要があります。おそらく静的IPやプロキシも必要です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 高速なネットワーク環境が必要です。8人以上なら最低30Mbit/s上り、15Mbit/s下り、10～20人なら100Mbit/s上り、50Mbit/s下りが理想です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; オンボードネットワークがない場合はネットワークカードが必要です。1Gbまたは10Gbのカードで十分です。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">CPU</span>
-						<span class="lang-ja" style="display:none;">CPU</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Any recent multicore cpu, either intel or amd, but amd probably has better value.</p>
-					<p class="fragment lang-en">&bull; And there’s that outside chance that we run it one of the mac studios.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 最近のマルチコアCPU（IntelまたはAMD）が必要ですが、AMDの方がコストパフォーマンスが高いです。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Mac Studioで運用する可能性もあります。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">GPU</span>
-						<span class="lang-ja" style="display:none;">GPU</span>
-					</h3>
-					<p class="fragment lang-en">&bull; There’s no GPU acceleration, so GPU performance doesn’t matter (unless we run mods with some kinda GPU rendering on the server side).</p>
-					<p class="fragment lang-en">&bull; We can probably get away with the integrated graphics.</p>
-					<p class="fragment lang-en">&bull; If we use a mac studio, it’s gonna be way overspecced for the GPU.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; GPUアクセラレーションは不要なので、GPU性能は重要ではありません（サーバー側でGPUレンダリングするMODを使わない限り）。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 内蔵グラフィックスでも十分です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Mac Studioを使う場合、GPUはオーバースペックになります。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Memory</span>
-						<span class="lang-ja" style="display:none;">メモリ</span>
-					</h3>
-					<p class="fragment lang-en">&bull; The memory requirements are higher for linux and macos, compared to windows… It shouldn’t matter, the difference should be small, 8gb for windows, 9gb for linux/macos according to the wiki.</p>
-					<p class="fragment lang-en">&bull; That’s only the memory requirements to run the server, so linux in headless mode will be the most memory efficient probably.</p>
-					<p class="fragment lang-en">&bull; In total, 16gb is a good starting point. 12gb for the server, 4gb for the OS, should be a good starting point for 10-20 players.</p>
-					<p class="fragment lang-en">&bull; The Mac studios have 32gb, so no issues there.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; LinuxやmacOSはWindowsよりメモリ要件が高いですが、差は小さいです。Windowsは8GB、Linux/macOSは9GBが目安です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; サーバー運用にはLinuxのヘッドレスモードが最もメモリ効率が良いでしょう。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 合計16GBが良い目安です。サーバーに12GB、OSに4GBで10～20人に対応できます。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Mac Studioは32GBあるので問題ありません。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Storage</span>
-						<span class="lang-ja" style="display:none;">ストレージ</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Mechanical disk is bigger than needed and slower than SSD.</p>
-					<p class="fragment lang-en">&bull; We’ll go with whatever SSD.</p>
-					<p class="fragment lang-en">&bull; For 10-20 players, a minimum of 35gb of free space is recommended.</p>
-					<p class="fragment lang-en">&bull; Given world size, backups, and OS requirements, 128gb SSD should be good enough. More doesn’t hurt.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; HDDは容量が大きいですが、SSDより遅いです。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; SSDならどれでも構いません。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 10～20人なら最低35GBの空き容量が必要です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; ワールドサイズやバックアップ、OS要件を考慮すると128GBのSSDが十分です。多い分には問題ありません。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Motherboard</span>
-						<span class="lang-ja" style="display:none;">マザーボード</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Mobo depends on OS/CPU we decide to go with.</p>
-					<p class="fragment lang-en">&bull; Other notes with Motherboard. IDE express versions, lanes. These transport data from storage/gpu to main memory.</p>
-					<p class="fragment lang-en">&bull; There used to be sound cards, but these have fallen out of favor and most just have onboard sound now.</p>
-					<p class="fragment lang-en">&bull; We’ll need some kind of case and fans. Possibly a monitor, for setup.</p>
-					<p class="fragment lang-en">&bull; Would be good to just have SSH setup, so we can SSH in. The machine will also need SSH daemon and ports open for that traffic.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; マザーボードは選択するOSやCPUによって異なります。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; IDE Expressのバージョンやレーン数も重要です。これらはストレージやGPUからメインメモリへのデータ転送に関係します。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 昔はサウンドカードが必要でしたが、今はほとんどがオンボードです。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; ケースやファン、セットアップ用のモニターも必要です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; SSHで接続できるように設定し、SSHデーモンとポート開放も必要です。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">OS</span>
-						<span class="lang-ja" style="display:none;">OS</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Windows, Linux, Mac</p>
-					<p class="fragment lang-en">&bull; Linux or Windows would be best.</p>
-					<p class="fragment lang-en">&bull; Linux may be hard since there’s very few ppl with experience, but the same can be said for Windows and Mac too…</p>
-					<p class="fragment lang-en">&bull; Only reason Mac is even in the question is because of the expensive Mac studios that are doing nothing.</p>
-					<p class="fragment lang-en">&bull; That would be the fastest machine possible unless we pay out a lot for new hardware.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Windows、Linux、Macが選択肢です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; LinuxかWindowsが最適です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Linuxは経験者が少ないため難しいかもしれませんが、WindowsやMacも同様です。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Macが候補に入るのは、使われていない高価なMac Studioがあるためです。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; 新しいハードウェアを購入しない限り、Mac Studioが最速のマシンです。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Java runtime environment (possibly sdk too)</span>
-						<span class="lang-ja" style="display:none;">Javaランタイム環境（SDKも必要かも）</span>
-					</h3>
-					<p class="fragment lang-en">&bull; OS, windows, linux, mac</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; OSはWindows、Linux、Macに対応しています。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Firewall</span>
-						<span class="lang-ja" style="display:none;">ファイアウォール</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Firewall configuration is important for security and connectivity.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; ファイアウォールの設定はセキュリティと接続性のために重要です。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Software and security updates</span>
-						<span class="lang-ja" style="display:none;">ソフトウェアとセキュリティの更新</span>
-					</h3>
-					<p class="fragment lang-en">&bull; Keep your server software and OS up to date for security and stability.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; サーバーソフトウェアとOSは常に最新の状態に保ち、セキュリティと安定性を確保しましょう。</p>
-				</section>
-				<section>
-					<h3>
-						<span class="lang-en">Backups</span>
-						<span class="lang-ja" style="display:none;">バックアップ</span>
-					</h3>
-					<p class="fragment lang-en">&bull; We can probably build the mod, compile and move it to the mods directory of our forge enabled server and it should work.</p>
-					<p class="fragment lang-en">&bull; Need to test, along with backups.</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; Modを作成し、コンパイルしてForge対応サーバーのmodsディレクトリに移動すれば動作するはずです。</p>
-					<p class="fragment lang-ja" style="display:none;">&bull; バックアップとともにテストが必要です。</p>
+					<div id="quiz-result" style="margin-top:20px; font-weight:bold; font-size:1.2em;"></div>
 				</section>
 			</div>
 		</div>
-				<script>
-					function setLanguage(lang) {
-                        document.querySelectorAll('.lang-en').forEach(e => e.style.display = (lang === 'en' ? '' : 'none'));
-                        document.querySelectorAll('.lang-ja').forEach(e => e.style.display = (lang === 'ja' ? '' : 'none'));
-                        var label = document.getElementById('lang-label');
-                        label.textContent = (lang === 'en') ? 'Language:' : '言語：';
-                        // Remove fragment class from all fragments
-                        document.querySelectorAll('.fragment').forEach(e => e.classList.remove('fragment'));
-                        // Add fragment class only to visible language
-                        document.querySelectorAll('.lang-' + lang).forEach(e => {
-                        if (e.tagName === 'P') e.classList.add('fragment');
-                        });
-                        if (window.Reveal && Reveal.sync) Reveal.sync();
-                        }
-					document.getElementById('lang-select').onchange = function() {
-						setLanguage(this.value);
-					};
-					// Default to English
-					setLanguage('en');
-				</script>
-		</div>
-	</div>
-	<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.min.js"></script>
-	<script>
-		Reveal.initialize();
-	</script>
+					<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.min.js"></script>
+					   <script>
+						   document.addEventListener('DOMContentLoaded', function() {
+							   // Load content.json and build slides
+							   fetch('content.json')
+								   .then(response => response.json())
+								   .then(data => {
+									   const slidesRoot = document.getElementById('slides-root');
+									   // Build slides
+									   data.slides.forEach((slide, idx) => {
+										   const section = document.createElement('section');
+										   const h = document.createElement(idx === 0 ? 'h2' : 'h3');
+										   h.innerHTML = `<span class="lang-en">${slide.title.en}</span><span class="lang-ja" style="display:none;">${slide.title.ja}</span>`;
+										   section.appendChild(h);
+										   slide.bullets.forEach(bullet => {
+											   const p = document.createElement('p');
+											   p.className = 'fragment';
+											   p.innerHTML = `&bull; <span class="lang-en">${bullet.en}</span><span class="lang-ja" style="display:none;">${bullet.ja}</span>`;
+											   section.appendChild(p);
+										   });
+										   slidesRoot.appendChild(section);
+									   });
+									   // Quiz intro slide
+									   const quizIntro = document.createElement('section');
+									   quizIntro.innerHTML = `<h3><span class="lang-en">Quiz: Test Your Knowledge</span><span class="lang-ja" style="display:none;">クイズ：知識をテストしましょう</span></h3>`;
+									   slidesRoot.appendChild(quizIntro);
+									   // Quiz question slides
+									   data.quiz.forEach((q, i) => {
+										const section = document.createElement('section');
+										const div = document.createElement('div');
+										div.className = 'quiz-question';
+										// Question is always visible, not a fragment
+										div.innerHTML = `<p><span class="lang-en">${i+1}. ${q.question.en}</span><span class="lang-ja" style="display:none;">${i+1}. ${q.question.ja}</span></p>`;
+										// Choices (all at once)
+										q.choices.forEach((choice, j) => {
+											div.innerHTML += `<label><span class="lang-en"><input type="radio" name="q${i+1}" value="${String.fromCharCode(97+j)}" class="quiz-choice"> ${choice.en}</span><span class="lang-ja" style="display:none;"><input type="radio" name="q${i+1}" value="${String.fromCharCode(97+j)}" class="quiz-choice"> ${choice.ja}</span></label>`;
+										});
+										// Add Next button for all but last question
+										if (i < data.quiz.length - 1) {
+											const nextBtn = document.createElement('button');
+											nextBtn.type = 'button';
+											nextBtn.className = 'quiz-next';
+											nextBtn.style = 'margin-top:20px; padding:8px 16px; font-size:1em; background:#e0e7ff; color:#222; border-radius:8px; border:none; font-weight:600;';
+											nextBtn.innerHTML = `<span class="lang-en">Next</span><span class="lang-ja" style="display:none;">次へ</span>`;
+											div.appendChild(nextBtn);
+										}
+										// Add submit button on last question
+										if (i === data.quiz.length - 1) {
+											const btn = document.createElement('button');
+											btn.type = 'button';
+											btn.id = 'quiz-submit';
+											btn.style = 'margin-top:20px; padding:8px 16px; font-size:1em;';
+											btn.innerHTML = `<span class="lang-en">Submit Quiz</span><span class="lang-ja" style="display:none;">クイズを提出</span>`;
+											div.appendChild(btn);
+										}
+										section.appendChild(div);
+										slidesRoot.appendChild(section);
+									   });
+									   // Score slide
+									   const scoreSection = document.createElement('section');
+									   scoreSection.id = 'score-slide';
+									   scoreSection.innerHTML = `<h2><span class="lang-en">Your Score</span><span class="lang-ja" style="display:none;">あなたのスコア</span></h2><div id="quiz-result" style="margin-top:20px; font-weight:bold; font-size:1.2em;"></div>`;
+									   slidesRoot.appendChild(scoreSection);
+
+									   // Initialize Reveal.js after slides are built
+									   if (window.Reveal && Reveal.initialize) {
+										   Reveal.initialize();
+									   }
+									   // Language logic
+									   function setLanguage(lang) {
+										   document.querySelectorAll('.lang-en').forEach(e => e.style.display = (lang === 'en' ? '' : 'none'));
+										   document.querySelectorAll('.lang-ja').forEach(e => e.style.display = (lang === 'ja' ? '' : 'none'));
+										   var label = document.getElementById('lang-label');
+										   label.textContent = (lang === 'en') ? 'Language:' : '言語：';
+										   // Only apply fragments to tutorial bullets, not quiz questions
+										   document.querySelectorAll('.fragment').forEach(e => e.classList.remove('fragment'));
+										   // Add fragment class only to tutorial slide bullets
+										   document.querySelectorAll('.slides > section').forEach(section => {
+											   if (!section.querySelector('.quiz-question')) {
+												   section.querySelectorAll('p').forEach(p => p.classList.add('fragment'));
+											   }
+										   });
+										   if (window.Reveal && Reveal.sync) Reveal.sync();
+									   }
+									   document.getElementById('lang-select').onchange = function() {
+										   setLanguage(this.value);
+									   };
+									   setLanguage('en');
+
+									   // Quiz grading logic
+									   // Attach submit button event directly after building slides
+									   setTimeout(function() {
+										var slidesRoot = document.getElementById('slides-root');
+										if (slidesRoot) {
+											document.addEventListener('click', function(event) {
+												// Next button logic
+												if (event.target && event.target.classList.contains('quiz-next')) {
+													event.preventDefault();
+													if (window.Reveal && Reveal.next) {
+														Reveal.next();
+													}
+												}
+												// Auto-advance on choice selection
+												if (event.target && event.target.classList.contains('quiz-choice')) {
+													// Only auto-advance if not last question
+													const currentSection = event.target.closest('section');
+													if (currentSection && !currentSection.querySelector('#quiz-submit')) {
+														setTimeout(function() {
+															if (window.Reveal && Reveal.next) {
+																Reveal.next();
+															}
+														}, 150);
+													}
+												}
+												// Submit button logic
+												if (event.target && event.target.id === 'quiz-submit') {
+													event.preventDefault();
+													let score = 0;
+													data.quiz.forEach((q, i) => {
+														const qName = 'q' + (i+1);
+														const selected = document.querySelector('input[name="' + qName + '"]:checked');
+														if (selected && (selected.value.charCodeAt(0) - 97) === q.answer) score++;
+													});
+													const percent = Math.round((score/data.quiz.length)*100);
+													let grade = '';
+													if (percent >= 90) grade = 'A';
+													else if (percent >= 80) grade = 'B';
+													else if (percent >= 70) grade = 'C';
+													else if (percent >= 60) grade = 'D';
+													else grade = 'F';
+													const lang = document.getElementById('lang-select').value;
+													let resultText = '';
+													if (lang === 'ja') {
+														resultText = `スコア: ${score}/${data.quiz.length} (${percent}%) — 評価: ${grade}`;
+													} else {
+														resultText = `Score: ${score}/${data.quiz.length} (${percent}%) — Grade: ${grade}`;
+													}
+													// Go to score slide first, then update score
+													if (window.Reveal && Reveal.slide) {
+														const slides = document.querySelectorAll('.slides > section');
+														let scoreIndex = -1;
+														slides.forEach((s, i) => {
+															if (s.id === 'score-slide') scoreIndex = i;
+														});
+														if (scoreIndex !== -1) {
+															Reveal.slide(scoreIndex);
+															setTimeout(function() {
+																document.getElementById('quiz-result').textContent = resultText;
+															}, 300);
+														} else {
+															document.getElementById('quiz-result').textContent = resultText;
+														}
+													} else {
+														document.getElementById('quiz-result').textContent = resultText;
+													}
+												}
+											});
+										}
+									   }, 400);
+								   });
+						   });
+					</script>
 </body>
 </html>
